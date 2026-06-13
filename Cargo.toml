@@ -1,0 +1,72 @@
+[package]
+name = "rllm_onnx_win"
+version = "0.1.0"
+edition = "2024"
+license = "Apache-2.0"
+description = "Rust-native LLM inference engine for weak GPUs on Windows (CUDA 11.8)"
+
+[lib]
+name = "rllm"
+crate-type = ["cdylib", "rlib"]
+
+[dependencies]
+# Python bindings
+pyo3 = { version = "0.23", features = ["extension-module"] }
+
+# CUDA bindings
+cudarc = { version = "0.12", features = ["cuda-11080", "driver", "f16"] }
+
+# Async runtime (from vLLM's Rust stack)
+tokio = { version = "1", features = ["macros", "net", "rt-multi-thread", "sync", "time"] }
+tokio-stream = "0.1"
+futures = "0.3"
+
+# Serialization
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+
+# HTTP server (from vLLM's Rust stack)
+axum = "0.8"
+tower = { version = "0.5", features = ["util"] }
+tower-http = { version = "0.6", features = ["trace"] }
+
+# gRPC (from vLLM)
+tonic = "0.14"
+prost = "0.14"
+
+# Metrics
+prometheus-client = "0.24"
+
+# Tokenizer
+tokenizers = "0.22"
+
+# Logging
+tracing = "0.1"
+tracing-subscriber = "0.3"
+
+# Utilities
+anyhow = "1"
+thiserror = "2"
+parking_lot = "0.12"
+arc-swap = "1"
+half = { version = "2", features = ["bytemuck"] }
+ndarray = { version = "0.16", features = ["serde"] }
+libc = "0.2"
+rand = "0.9"
+uuid = { version = "1", features = ["v4"] }
+validator = { version = "0.20", features = ["derive"] }
+num_cpus = "1"
+
+[build-dependencies]
+cmake = "0.1"
+
+[features]
+default = ["cuda"]
+cuda = []
+rocm = []
+cpu = []
+
+[profile.release]
+lto = "thin"
+panic = "abort"
+opt-level = 3

@@ -1,0 +1,8 @@
+/target/
+*.pyd
+*.dll
+*.pdb
+*.exp
+*.lib
+__pycache__/
+*.pyc
