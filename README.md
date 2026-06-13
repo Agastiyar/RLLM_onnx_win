@@ -1,5 +1,13 @@
 # RLLM_onnx_win
 
+## Description:
+
+Rust-native LLM inference engine for weak GPUs (T600, GTX 1050, MX150). Built on vLLM architecture, rewritten in Rust for CUDA 11.8. PagedAttention, FP8/INT8/INT4 quantization, PyO3 Python bindings.
+
+## Topics (нажми "Add topics"):
+
+rust llm inference cuda gpu vllm pagedattention pyo3 windows quantization weak-gpu
+
 **Rust-native LLM inference engine for weak GPUs on Windows.**
 
 Based on vLLM architecture, rewritten in Rust for maximum performance on budget hardware.
